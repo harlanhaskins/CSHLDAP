@@ -331,11 +331,15 @@ class Member(object):
             string = string[0]
         if not isinstance(string, str):
             string = str(string)
-        search = re.search("[^\w']+", string, re.UNICODE)
-        if not search:
-            return string
-        indexOfNonWord = search.start()
-        return string[:indexOfNonWord]
+        return string
+
+    def defaultEmail(self):
+        try:
+            return self.mail[0]
+        except:
+            if isinstance(self.mail, str):
+                return self.mail
+            return None
 
     def __str__(self):
         """ Constructs a string representation of this person, containing
