@@ -316,13 +316,26 @@ class Member(object):
         """ Returns a reliable full name (firstName lastName) for every
             member (as of the writing of this comment.)
         """
-        if self.givenName and self.sn:
-            return "{0} {1}".format(self.givenName, self.sn)
-        if self.givenName:
-            return self.givenName
-        if self.sn:
-            return self.sn
+        # If either the first or last name is a list,
+        # grab the first one.
+        firstName = self.normalizedString(self.givenName)
+        lastName = self.normalizedString(self.sn)
+        if firstName and lastName:
+            return "{0} {1}".format(firstName, lastName)
+        if lastName: return lastName
+        if firstName: return self.sn
         return self.uid
+
+    def normalizedString(self, string):
+        if isinstance(string, list):
+            string = string[0]
+        if not isinstance(string, str):
+            string = str(string)
+        search = re.search("\W", string)
+        if not search:
+            return string
+        indexOfNonWord = search.start()
+        return string[:indexOfNonWord]
 
     def __str__(self):
         """ Constructs a string representation of this person, containing
