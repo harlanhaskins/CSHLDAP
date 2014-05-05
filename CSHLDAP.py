@@ -331,7 +331,7 @@ class Member(object):
             string = string[0]
         if not isinstance(string, str):
             string = str(string)
-        search = re.search("\W", string)
+        search = re.search("[\W']", string)
         if not search:
             return string
         indexOfNonWord = search.start()
