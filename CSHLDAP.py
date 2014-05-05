@@ -327,6 +327,8 @@ class Member(object):
         return self.uid
 
     def normalizedString(self, string):
+        if not string:
+            return None
         if isinstance(string, list):
             string = string[0]
         if not isinstance(string, str):
