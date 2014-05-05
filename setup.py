@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup(name='CSHLDAP',
-      version='0.2',
+      version='0.2.1',
       description='LDAP Wrapper for CSH',
       author='Matt Gambogi',
       author_email='m@csh.rit.edu',
